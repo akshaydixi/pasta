@@ -1,0 +1,15 @@
+#Insert the required authentication parameters here and create an auth.py file
+#The password can be taken from shirioko's WART 
+
+
+#Phone Number
+#------------
+#phone = 'country code ' + ' phone number '
+phone = '91' + '9788315834'
+
+
+#Password
+#--------
+#password = ' password got from WART or some other tool '
+password = 'FW23ifnw9f22fic2WEfw4-=' # NOTE : The password will be a valid base64 string
+
