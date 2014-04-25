@@ -9,9 +9,9 @@ def makeJid(phone):
 def onAuthSuccess(ph):
   print "Logged in with %s" % ph
 
-def onMessageReceived(jid, messageId,content,timestamp,receiptRequested,x,y):
+def onMessageReceived(messageId,jid,content,timestamp,receiptRequested,x,y):
   methodsInterface.call("message_ack",(jid,messageId))
-  print jid,messageId,content
+  print content
 
 def onMessageSent(jid,messageId):
   print "message sent successfully to %s" % jid
@@ -38,6 +38,7 @@ signalsInterface.registerListener("ping",onPing)
 methodsInterface.call("ready")
 
 while True:
-  pass
+  s = raw_input("Enter message: ")
+  methodsInterface.call("message_send",("919566816614@s.whatsapp.net",s))
 
 
