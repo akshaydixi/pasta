@@ -1,2 +1,3 @@
 *.config
-
+auth.py
+*.pyc
