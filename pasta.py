@@ -4,7 +4,7 @@ import base64
 password = base64.b64decode(bytes(password.encode('utf-8')))
 import serial,codecs,time
 from Modules.Bot import Bot
-
+from Yowsup.Media.uploader import MediaUploader
 
 
 SERIALCONTENT = "pasta - a whatsappbot"
@@ -20,13 +20,19 @@ def onMessageReceived(messageId,jid,content,timestamp,receiptRequested,x,y):
   methodsInterface.call("message_ack",(jid,messageId))
   SERIALCONTENT = content.encode(sys.stdout.encoding,errors='replace')
   print SERIALCONTENT
-  pastabot = Bot()
-  pastabot.message(SERIALCONTENT,methodsInterface)
+  pastabot.message(SERIALCONTENT,methodsInterface,jid)
   
   """
   if len(SERIALCONTENT) < 16:
     ser.write(SERIALCONTENT)
   """
+
+def onGroupMessageReceived(messageId,jid,author,content,timestamp,receiptRequested,x):
+  global SERIALCONTENT,pastabot
+  methodsInterface.call("message_ack",(jid,messageId))
+  SERIALCONTENT = content.encode(sys.stdout.encoding,errors='replace')
+  pastabot.message(SERIALCONTENT,methodsInterface,jid)
+
 
 def onGroupSubjectReceived(messageId,jid,author,subject,timestamp,receiptRequeted):
   global SERIALCONTENT
@@ -38,6 +44,14 @@ def onGroupSubjectReceived(messageId,jid,author,subject,timestamp,receiptRequete
     ser.write(SERIALCONTENT)
   """
 
+def onImageReceived(messageId, jid, preview, url, size, receiptRequested,x):
+  methodsInterface.call("message_ack",(jid,messageId))
+  print "preview: ",preview
+  print "url: ",url
+  print "size-------------------------------------------------------------------------------- ",size
+  print "receipRequested: ",receiptRequested
+  print "x: ",x
+
 def onMessageSent(jid,messageId):
   print "message sent successfully to %s" % jid
 
@@ -48,10 +62,21 @@ def onMessageDelivered(jid, messageId):
 def onPing(pingId):
   methodsInterface.call("pong", (pingId,))
 
+def onUploadRequestSuccess(hsh,url,resumeFrom):
+  #print "RESUME FROM :-----------------",resumeFrom
+  
+  pastabot.upload(url,methodsInterface,MediaUploader)
+  
+def onUploadRequestFailed(hsh):
+  print "Upload request failed!"
+
+def onUploadRequestDuplicate(hsh,url):
+  pastabot.uploadDuplicate(url,methodsInterface)
 def onReady():
   print "Ready?"
 
 y = YowsupConnectionManager()
+pastabot = Bot()
 signalsInterface = y.getSignalsInterface()
 methodsInterface = y.getMethodsInterface()
 signalsInterface.registerListener("auth_success",onAuthSuccess)
@@ -60,8 +85,12 @@ signalsInterface.registerListener("message_received",onMessageReceived)
 signalsInterface.registerListener("receipt_messageSent", onMessageSent)
 signalsInterface.registerListener("receipt_messageDelivered", onMessageDelivered)
 signalsInterface.registerListener("group_subjectReceived",onGroupSubjectReceived)
-
+signalsInterface.registerListener("image_received",onImageReceived)
+signalsInterface.registerListener("group_messageReceived",onGroupMessageReceived)
 signalsInterface.registerListener("ping",onPing)
+signalsInterface.registerListener("media_uploadRequestSuccess",onUploadRequestSuccess)
+signalsInterface.registerListener("media_uploadRequestFailed",onUploadRequestFailed)
+signalsInterface.registerListener("media_uploadRequestDuplicate",onUploadRequestDuplicate)
 methodsInterface.call("ready")
 #ser = serial.Serial('/dev/ttyUSB0',9600)
 

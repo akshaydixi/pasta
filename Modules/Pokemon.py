@@ -16,13 +16,13 @@ class PokemonBot():
     if is_number(param):
       try:
         url = pykemon.get(sprite=int(param)).image
-        return {'url' : 'http://pokeapi.co/' + url}
+        return {'image' : 'http://pokeapi.co/' + url}
       except:
         return {'error' : '404 - Wrong pokemon id'}
     else:
       try:
         pid = str(pykemon.get(pokemon=param).id)
-        return {'url' : 'http://pokeapi.co//media/img/' + pid + '.png'}
+        return {'image' : 'http://pokeapi.co//media/img/' + pid + '.png'}
       except:
         return {'error' : '404 - Wrong pokemon name'}
 

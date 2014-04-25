@@ -23,7 +23,7 @@ class MediaUploader(WARequest):
         self.sock = socket.socket();
         
     def upload(self, sourcePath, uploadUrl):
-        
+        print uploadUrl
         _host = uploadUrl.replace("https://","")
 
         self.url = _host[:_host.index('/')]
@@ -39,7 +39,9 @@ class MediaUploader(WARequest):
     
             m = hashlib.md5()
             m.update(filename.encode())
+            #print "TAG1"
             crypto = m.hexdigest() + os.path.splitext(filename)[1]
+            print crypto
     
             boundary = "zzXXzzYYzzXXzzQQ"#"-------" + m.hexdigest() #"zzXXzzYYzzXXzzQQ"
             contentLength = 0
@@ -50,13 +52,14 @@ class MediaUploader(WARequest):
             hBAOS += "--" + boundary + "\r\n"
             hBAOS += "Content-Disposition: form-data; name=\"from\"\r\n\r\n"
             hBAOS += self.accountJid.replace("@whatsapp.net","") + "\r\n"
+            #print "TAG2"
     
             hBAOS += "--" + boundary + "\r\n"
             hBAOS += "Content-Disposition: form-data; name=\"file\"; filename=\"" + crypto + "\"\r\n"
             hBAOS  += "Content-Type: " + filetype + "\r\n\r\n"
     
             fBAOS = "\r\n--" + boundary + "--\r\n"
-            
+            #print "TAG3"
             contentLength += len(hBAOS)
             contentLength += len(fBAOS)
             contentLength += filesize
@@ -81,7 +84,8 @@ class MediaUploader(WARequest):
             f.close()
             status = 0
             lastEmit = 0
-    
+            #print "TAG2"
+
             while totalsent < int(filesize):
                 ssl_sock.write(stream[:buf])
                 status = totalsent * 100 / filesize
@@ -113,6 +117,7 @@ class MediaUploader(WARequest):
             
             
             result = None
+            #print "TAG3"
 
             for l in lines:
                 if l.startswith("{"):

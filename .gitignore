@@ -2,3 +2,5 @@
 auth.py
 *.pyc
 build/*
+*.swp
+image*
