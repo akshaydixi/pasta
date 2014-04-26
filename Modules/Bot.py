@@ -1,5 +1,6 @@
 from Pokemon import PokemonBot
 from Keywords import Keywords
+from WeHack import WeHackBot
 import base64
 import urllib
 import os
@@ -35,7 +36,10 @@ class Bot():
       parts = [ part.lower() for part in parts]
       keyword = parts[0]
       command = parts[1]
-      params = parts[2:]
+      try:
+        params = parts[2:]
+      except:
+        params = ['']
 
       ## Pokemon Bot stuff here ##
 
@@ -45,7 +49,10 @@ class Bot():
           result = pokebot.image(params[0])
         if command == 'desc' or command == 'description':
           result = pokebot.description(params[0])
-      
+      if keyword == 'wehack':
+        wehackbot = WeHackBot()
+        if command == 'count' or command == 'registrations':
+         result = wehackbot.count()
       # Wiki stuff here ##
       #if keyword == 'wiki':
 
@@ -70,6 +77,10 @@ class Bot():
           methodsInterface.call("media_requestUpload",(hsh,"image",self.size))
           with open("image.png","rb")  as image_file:
               self.base64_string = base64.b64encode(image_file.read())
+
+        if r == 'error':
+          content = str(result[r])
+          methodsInterface.call("message_send",(jid,content))
           #print hsh,self.base64_string
           #print base64_string
           #methodsInterface.call("message_imageSend",(jid,url,"Image",str(size),base64_string))

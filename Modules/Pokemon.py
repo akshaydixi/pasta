@@ -33,8 +33,8 @@ class PokemonBot():
 		num = description.split('/')[-1]
 		description_text = pykemon.get(description=num).description
 		return {'text' : description_text }
-	except e:
-		return {'error' : '404 - Wrong Pokemon query'}
+        except: 
+		return {'error' : '404 - Wrong Pokemon name'}
           
         
       
