@@ -7,14 +7,16 @@ INSTALLATION
 ------------
 * First of all, get your Whatsapp password from any registration tool like
   Shirioko's WART
+
 * Create an ***auth.py*** file from auth.py.example and enter the phone number
   and password
 * Install the requirements 
 
-    pip install -r requirements.txt
+        pip install -r requirements.txt
 
 * Run the bot!
-    python pasta.py
+   
+         python pasta.py
 
 
 CHANGELOG
