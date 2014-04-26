@@ -8,7 +8,7 @@ CHANGELOG
 
 1. 25/4/2014 : Forked Yowsup and pywhatsapp to see how they connect with
    Whatsapp
-
+2. 26/4/2014 : Built a small Pokemon image/description fetcher bot on top of PokeAPI
 
 
 ###Thanks to:
@@ -18,7 +18,8 @@ CHANGELOG
 LICENSE
 -------
 MIT License:
-  Copyright (c) <2014> Akshay Dixit <akshaydixi@gmail.com>
+    
+    Copyright (c) <2014> Akshay Dixit <akshaydixi@gmail.com>
 
     Permission is hereby granted, free of charge, to any person obtaining a copy of this
     software and associated documentation files (the "Software"), to deal in the Software
