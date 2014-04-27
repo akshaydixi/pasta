@@ -1,6 +1,7 @@
 from Pokemon import PokemonBot
 from Keywords import Keywords
 from WeHack import WeHackBot
+from RhythmBox import RhythmBoxBot
 import base64
 import urllib
 import os
@@ -51,16 +52,29 @@ class Bot():
           result = pokebot.description(params[0])
         if command == 'name' or command == 'naam':
           result = pokebot.name(params[0])
+
       if keyword == 'wehack':
         wehackbot = WeHackBot()
         if command == 'count' or command == 'registrations':
          result = wehackbot.count()
       # Wiki stuff here ##
       #if keyword == 'wiki':
-
-
-
-      print "Result : ",result
+      if keyword == 'music':
+        rbot = RhythmBoxBot()
+        if command == 'play':
+          result = rbot.play()
+        if command == 'pause':
+          result = rbot.pause()
+        if command == 'next':
+          result = rbot.next()
+        if command == 'previous':
+          result = rbot.previous()
+        if command == 'current':
+          result = rbot.current()
+        if command == 'help':
+          result = rbot.help()
+        if command == 'volume':
+          result = rbot.volume(params[0])
       for r in result:
         if r=='text':
           content = str(result[r])

@@ -100,8 +100,8 @@ methodsInterface.call("ready")
 #ser = serial.Serial('/dev/ttyUSB0',9600)
 
 while True:
-  #s = raw_input("Enter message: ")
-  #methodsInterface.call("message_send",("919566816614@s.whatsapp.net",s))
+  s = raw_input("Enter message: ")
+  methodsInterface.call("message_send",("919159600366-1392284581@g.us",s))
   pass
   """
   if len(SERIALCONTENT) > 16:
