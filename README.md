@@ -3,7 +3,23 @@ Pasta : A Whatsapp Bot
 
 An attempt to link between Hubot / Err bots to the Whatsapp protocol
 
-CHANGELOG
+Installation
+------------
+* First of all, get your Whatsapp password from any registration tool like
+  Shirioko's WART
+
+* Create an ***auth.py*** file from auth.py.example and enter the phone number
+  and password
+* Install the requirements 
+
+        pip install -r requirements.txt
+
+* Run the bot!
+   
+         python pasta.py
+
+
+Changelog
 ---------
 
 1. 25/4/2014 : Forked Yowsup and pywhatsapp to see how they connect with
@@ -11,11 +27,12 @@ CHANGELOG
 2. 26/4/2014 : Built a small Pokemon image/description fetcher bot on top of PokeAPI
 
 
-###Thanks to:
+Thanks to
+---------
 * **[Yowsup](https://github.com/tgalal/yowsup)**
 * **[WART](https://github.com/shirioko/WART)**
-
-LICENSE
+* **[Pykemon](https://github.com/phalt/pykemon)**
+License
 -------
 MIT License:
     
