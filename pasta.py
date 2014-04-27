@@ -75,6 +75,10 @@ def onUploadRequestDuplicate(hsh,url):
 def onReady():
   print "Ready?"
 
+def onDisconnected(reason):
+  print "Disconnected due to : ",reason
+  methodsInterface.call("auth_login",(phone,password))
+
 y = YowsupConnectionManager()
 pastabot = Bot()
 signalsInterface = y.getSignalsInterface()
@@ -91,12 +95,14 @@ signalsInterface.registerListener("ping",onPing)
 signalsInterface.registerListener("media_uploadRequestSuccess",onUploadRequestSuccess)
 signalsInterface.registerListener("media_uploadRequestFailed",onUploadRequestFailed)
 signalsInterface.registerListener("media_uploadRequestDuplicate",onUploadRequestDuplicate)
+signalsInterface.registerListener("disconnected",onDisconnected)
 methodsInterface.call("ready")
 #ser = serial.Serial('/dev/ttyUSB0',9600)
 
 while True:
-  s = raw_input("Enter message: ")
-  methodsInterface.call("message_send",("919566816614@s.whatsapp.net",s))
+  #s = raw_input("Enter message: ")
+  #methodsInterface.call("message_send",("919566816614@s.whatsapp.net",s))
+  pass
   """
   if len(SERIALCONTENT) > 16:
     times = len(SERIALCONTENT) - 15
