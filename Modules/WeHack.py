@@ -14,6 +14,9 @@ class WeHackBot():
         soup = BeautifulSoup(str(trs[-1]))
         tds = soup.findAll('td')
         firsttd = tds[0]
-        return {"text" : str(firsttd.string) + " registrations so far!"}
+        sock = urllib.urlopen('http://clabs.vit.ac.in/wehackcount')
+        content = sock.read()
+        sock.close()
+        return {"text" : str(eval(firsttd.string) + eval(content)) + " registrations so far!"}
     except:
       return {"error" : "404 - Site down"}

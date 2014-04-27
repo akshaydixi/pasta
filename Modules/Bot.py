@@ -49,6 +49,8 @@ class Bot():
           result = pokebot.image(params[0])
         if command == 'desc' or command == 'description':
           result = pokebot.description(params[0])
+        if command == 'name' or command == 'naam':
+          result = pokebot.name(params[0])
       if keyword == 'wehack':
         wehackbot = WeHackBot()
         if command == 'count' or command == 'registrations':

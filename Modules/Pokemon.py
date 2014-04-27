@@ -36,7 +36,14 @@ class PokemonBot():
         except: 
 		return {'error' : '404 - Wrong Pokemon name'}
           
-        
+  def name(self,param):
+    try:
+        pokemon = pykemon.get(pokemon=param)
+        name = pokemon.name
+        return {'text': name}
+    except:
+        return {'error' : '404 - Wrong Pokemon query'} 
+
       
 
 
