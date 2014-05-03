@@ -79,6 +79,10 @@ def onDisconnected(reason):
   print "Disconnected due to : ",reason
   methodsInterface.call("auth_login",(phone,password))
 
+def onGroupImageReceived(messageId, jid, author, preview, url, size, receiptRequested):
+  methodsInterface.call("message_ack",(jid,messageId))
+
+
 y = YowsupConnectionManager()
 pastabot = Bot()
 signalsInterface = y.getSignalsInterface()
@@ -96,6 +100,8 @@ signalsInterface.registerListener("media_uploadRequestSuccess",onUploadRequestSu
 signalsInterface.registerListener("media_uploadRequestFailed",onUploadRequestFailed)
 signalsInterface.registerListener("media_uploadRequestDuplicate",onUploadRequestDuplicate)
 signalsInterface.registerListener("disconnected",onDisconnected)
+signalsInterface.registerListener("group_imageReceived",onGroupImageReceived)
+
 methodsInterface.call("ready")
 #ser = serial.Serial('/dev/ttyUSB0',9600)
 
